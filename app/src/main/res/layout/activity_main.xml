@@ -7,34 +7,51 @@
     tools:context="com.example.n00146163.httpurlconnection.MainActivity">
 
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="8dp"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/Button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:onClick="onXMLClicked"
+        android:text="XML"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="1dp"
         android:layout_marginLeft="16dp"
-        android:text="Thread"
+        android:layout_marginStart="16dp"
+        android:onClick="onJSONClicked"
+        android:text="JSON"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:onClick="onButtonClicked"/>
-
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:onClick="onClearClicked"
         android:text="Clear"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:onClick="onClearClicked"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvItems"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layoutManager="LinearLayoutManager"/>
 
 </android.support.constraint.ConstraintLayout>
