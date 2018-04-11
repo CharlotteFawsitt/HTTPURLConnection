@@ -1,9 +1,6 @@
-package Model;
+package com.example.n00146163.httpurlconnection.Model;
 
-import android.content.ContentValues;
 import android.graphics.Bitmap;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 
 import java.util.UUID;

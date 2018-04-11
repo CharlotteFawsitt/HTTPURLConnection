@@ -1,4 +1,4 @@
-package Parsers;
+package com.example.n00146163.httpurlconnection.Parsers;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -7,7 +7,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Patient;
+import com.example.n00146163.httpurlconnection.Model.Patient;
 
 
 /**

@@ -1,11 +1,7 @@
 package com.example.n00146163.httpurlconnection;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import java.io.InputStream;
 import java.util.List;
 
-import Model.Patient;
+import com.example.n00146163.httpurlconnection.Model.Patient;
 
 /**
  * Created by n00146163 on 21/11/2017.
