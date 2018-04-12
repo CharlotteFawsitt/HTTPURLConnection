@@ -31,56 +31,51 @@ public class ASyncTaskActivity extends AppCompatActivity {
 
 
     private static final String PHOTOS_BASE_URL = "http://172.18.15.71/patientPhotos/" ;
-    TextView output;
-    String data;
     List<Patient> patientsList = new ArrayList<>();
-    Patient[] patientlistJSON;
     RecyclerView recyclerView;
     PatientAdapter adapter;
+    String type = "";
     public static final String XML_URL = "http://172.18.15.71/Patient.xml";
-
     public static final String JSON_URL = "http://172.18.15.71/Patient.json";
 
     public void onJSONClicked(View view) {
         JSONThread thread = new JSONThread();
         thread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, JSON_URL);
+        type = "XML";
     }
 
     public void onXMLClicked(View view) {
         XMLThread thread = new XMLThread();
         thread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, XML_URL);
+        type = "JSON";
     }
 
     public void onClearClicked(View view) {
         patientsList.clear();
-        updateDisplay2();
+        updateDisplay();
 
     }
 
-    public void updateDisplay(Patient[] patientlist) {
-        recyclerView = (RecyclerView) findViewById(R.id.rvItems);
-        adapter = new PatientAdapter(this, Arrays.asList(patientlist));
-        recyclerView.setAdapter(adapter);
-    }
-
-    public void updateDisplay2() {
+    public void updateDisplay() {
         recyclerView = (RecyclerView) findViewById(R.id.rvItems);
         adapter = new PatientAdapter(this, patientsList);
         recyclerView.setAdapter(adapter);
     }
 
 
-    private class JSONThread extends AsyncTask<Object, Object, Patient[]> {
+    private class JSONThread extends AsyncTask<Object, Object, List<Patient>> {
 
         @Override
-        protected Patient[] doInBackground(Object... params) {
+        protected List<Patient> doInBackground(Object... params) {
+
 
             String content = HttpManagerImports.getData((String) params[0]);
 
             Gson gson = new Gson();
             Patient[] patientlist = gson.fromJson(content, Patient[].class);
+            patientsList = new ArrayList<>(Arrays.asList(patientlist));
 
-            for (Patient p : patientlist) {
+            for (Patient p : patientsList) {
                 try {
                     String imageUrl = PHOTOS_BASE_URL + p.getPhoto();
 
@@ -94,7 +89,7 @@ public class ASyncTaskActivity extends AppCompatActivity {
                 }
             }
 
-            return patientlist;
+            return patientsList;
         }
 
         @Override
@@ -104,8 +99,8 @@ public class ASyncTaskActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Patient[] patientlist) {
-            updateDisplay(patientlist);
+        protected void onPostExecute(List<Patient> patientsList) {
+            updateDisplay();
 
         }
     }
@@ -138,12 +133,12 @@ public class ASyncTaskActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            updateDisplay2();
+            updateDisplay();
         }
 
         @Override
         protected void onPostExecute(List<Patient> patientsList) {
-            updateDisplay2();
+            updateDisplay();
 
         }
     }

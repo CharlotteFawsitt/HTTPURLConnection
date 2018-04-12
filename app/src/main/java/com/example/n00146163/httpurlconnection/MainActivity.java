@@ -23,5 +23,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent= new Intent(this, IntentActivity.class);
         startActivity(intent);
     }
+    public void onASyncTaskLoaderClicked(View view) {
+        Intent intent= new Intent(this, ASyncTaskLoaderActivity.class);
+        startActivity(intent);
+    }
 
 }

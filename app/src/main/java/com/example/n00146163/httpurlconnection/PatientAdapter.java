@@ -71,8 +71,8 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.itemNameText);
-            imageView = (ImageView) itemView.findViewById(R.id.tvPatientImage);
+            tvName = itemView.findViewById(R.id.itemNameText);
+            imageView = itemView.findViewById(R.id.tvPatientImage);
             mView = itemView;
         }
     }

@@ -20,13 +20,15 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".Service.MyIntentService"
+        <service
+            android:name=".Service.MyIntentService"
             android:exported="false" />
 
         <activity
             android:name=".ASyncTaskActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".IntentActivity"></activity>
+        <activity android:name=".IntentActivity" android:parentActivityName=".MainActivity" />
+        <activity android:name=".ASyncTaskLoaderActivity" android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,9 @@
 package com.example.n00146163.httpurlconnection.Model;
 
+import android.content.ContentValues;
 import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 
 import java.util.UUID;
@@ -10,7 +13,7 @@ import java.util.UUID;
  */
 
 //class for patient
-public class Patient {
+public class Patient implements Parcelable {
     //variables for the class
     private String patientId;
     private String name;
@@ -95,6 +98,37 @@ public class Patient {
         this.nextApp = nextApp;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.patientId);
+        dest.writeString(this.name);
+        dest.writeString(this.gender);
+        dest.writeString(this.phoneNumber);
+        dest.writeString(this.nextApp);
+        dest.writeString(this.photo);
+    }
 
+    protected Patient(Parcel in) {
+        this.patientId = in.readString();
+        this.name = in.readString();
+        this.gender = in.readString();
+        this.phoneNumber = in.readString();
+        this.nextApp = in.readString();
+        this.photo = in.readString();
+    }
+
+    public static final Parcelable.Creator<Patient> CREATOR = new Parcelable.Creator<Patient>() {
+        public Patient createFromParcel(Parcel source) {
+            return new Patient(source);
+        }
+
+        public Patient[] newArray(int size) {
+            return new Patient[size];
+        }
+    };
 }

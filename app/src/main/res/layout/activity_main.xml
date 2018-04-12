@@ -29,14 +29,15 @@ tools:context="com.example.n00146163.httpurlconnection.MainActivity">
         app:layout_constraintLeft_toRightOf="@+id/Button2"
         app:layout_constraintRight_toLeftOf="@+id/clear" />
 
-<Button
-    android:id="@+id/clear"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="284dp"
-    android:text="ASyncTaskLoader"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintLeft_toRightOf="@+id/Button" />
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="284dp"
+        android:onClick="onASyncTaskLoaderClicked"
+        android:text="ASyncTaskLoader"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/Button"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
