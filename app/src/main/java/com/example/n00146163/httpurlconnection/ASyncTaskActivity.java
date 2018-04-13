@@ -28,32 +28,40 @@ public class ASyncTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_async_task);
     }
 
-    private static final String PHOTOS_BASE_URL = "http://172.18.15.71/patientPhotos/" ;
-    List<Patient> patientsList = new ArrayList<>();
-    RecyclerView recyclerView;
-    PatientAdapter adapter;
-    String type = "";
+    //Constants for the xml, json files and the photo location.
+    private static final String PHOTOS_BASE_URL = "http://172.18.15.71/patientPhotos/";
     private static final String XML_URL = "http://172.18.15.71/Patient.xml";
     private static final String JSON_URL = "http://172.18.15.71/Patient.json";
+    //Arraylist to be used to hold the patients.
+    List<Patient> patientsList = new ArrayList<>();
+    //Instance of the recyclerview and the adapter.
+    RecyclerView recyclerView;
+    PatientAdapter adapter;
+    //String to be used to set the data type when a button is clicked.
+    String type = "";
 
+    //Click handler for the JSON button, Sets the type to "JSON" and launchs the thread pool executer.
     public void onJSONClicked(View view) {
         MyThread thread = new MyThread();
         type = "JSON";
         thread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, JSON_URL);
     }
 
+    //Click handler for the XML button, Sets the type to "XML" and launchs the thread pool executer.
     public void onXMLClicked(View view) {
         MyThread thread = new MyThread();
         type = "XML";
         thread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, XML_URL);
     }
 
+    //CLick handler for the clear button, clears the patientlist and updates the display.
     public void onClearClicked(View view) {
         patientsList.clear();
         updateDisplay();
 
     }
 
+    //Fills the recyclerview with the patientlist.
     public void updateDisplay() {
         recyclerView = (RecyclerView) findViewById(R.id.rvItems);
         adapter = new PatientAdapter(this, patientsList);
@@ -66,17 +74,23 @@ public class ASyncTaskActivity extends AppCompatActivity {
         @Override
         protected List<Patient> doInBackground(String... params) {
 
+            //Checks to see what type is set to.
             if (type.equals("JSON")) {
+                //gets the url of the file.
                 String content = HttpManagerImports.getData(params[0]);
                 Gson gson = new Gson();
+                //Puts the values of the JSON file into an array.
                 Patient[] patientlist = gson.fromJson(content, Patient[].class);
+                //Fills the arraylist with objects from the Array.
                 patientsList = new ArrayList<>(Arrays.asList(patientlist));
             } else if (type.equals("XML")) {
                 String content = HttpManagerImports.getData(params[0]);
+                //Calls the xml parser to parse the XML file to get the object.
                 patientsList = XMLParser.parseFeed(content);
             }
 
 
+            //Loop to get the image for each patient and assign the image to that patient.
             for (Patient p : patientsList) {
                 try {
                     String imageUrl = PHOTOS_BASE_URL + p.getPhoto();
@@ -96,7 +110,6 @@ public class ASyncTaskActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-
             updateDisplay();
         }
 
