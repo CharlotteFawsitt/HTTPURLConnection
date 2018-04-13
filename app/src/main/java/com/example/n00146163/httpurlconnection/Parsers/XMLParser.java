@@ -42,7 +42,7 @@ public class XMLParser {
                     case XmlPullParser.START_TAG:
                         currentTagName = parser.getName();
 
-                        // if starting a new Dog in the XML create a new Dog object to start building it up.
+                        // if starting a new Dog in the XML create a new Patient object to start building it up.
                         if (currentTagName.equals("patient")) {
                             inDataItemTag = true;
                             p = new Patient();
@@ -50,7 +50,7 @@ public class XMLParser {
                         }
                         break;
 
-                    // if you find an end task check to see if its the end of a dog object
+                    // if you find an end task check to see if its the end of a Patient object
                     case XmlPullParser.END_TAG:
                         // if leaving current product
                         if (parser.getName().equals("patient")) {

@@ -28,26 +28,24 @@ public class ASyncTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_async_task);
     }
 
-
-
     private static final String PHOTOS_BASE_URL = "http://172.18.15.71/patientPhotos/" ;
     List<Patient> patientsList = new ArrayList<>();
     RecyclerView recyclerView;
     PatientAdapter adapter;
     String type = "";
-    public static final String XML_URL = "http://172.18.15.71/Patient.xml";
-    public static final String JSON_URL = "http://172.18.15.71/Patient.json";
+    private static final String XML_URL = "http://172.18.15.71/Patient.xml";
+    private static final String JSON_URL = "http://172.18.15.71/Patient.json";
 
     public void onJSONClicked(View view) {
-        JSONThread thread = new JSONThread();
+        MyThread thread = new MyThread();
+        type = "JSON";
         thread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, JSON_URL);
-        type = "XML";
     }
 
     public void onXMLClicked(View view) {
-        XMLThread thread = new XMLThread();
+        MyThread thread = new MyThread();
+        type = "XML";
         thread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, XML_URL);
-        type = "JSON";
     }
 
     public void onClearClicked(View view) {
@@ -63,56 +61,21 @@ public class ASyncTaskActivity extends AppCompatActivity {
     }
 
 
-    private class JSONThread extends AsyncTask<Object, Object, List<Patient>> {
-
-        @Override
-        protected List<Patient> doInBackground(Object... params) {
-
-
-            String content = HttpManagerImports.getData((String) params[0]);
-
-            Gson gson = new Gson();
-            Patient[] patientlist = gson.fromJson(content, Patient[].class);
-            patientsList = new ArrayList<>(Arrays.asList(patientlist));
-
-            for (Patient p : patientsList) {
-                try {
-                    String imageUrl = PHOTOS_BASE_URL + p.getPhoto();
-
-                    InputStream in = (InputStream) new URL(imageUrl).getContent();
-                    Bitmap bitmap = BitmapFactory.decodeStream(in);
-
-                    p.setBitmap(bitmap);
-                    in.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return patientsList;
-        }
-
-        @Override
-        protected void onPreExecute() {
-
-//            updateDisplay();
-        }
-
-        @Override
-        protected void onPostExecute(List<Patient> patientsList) {
-            updateDisplay();
-
-        }
-    }
-
-    private class XMLThread extends AsyncTask<String, String, List<Patient>> {
+    private class MyThread extends AsyncTask<String, String, List<Patient>> {
 
         @Override
         protected List<Patient> doInBackground(String... params) {
 
-            String content = HttpManagerImports.getData(params[0]);
+            if (type.equals("JSON")) {
+                String content = HttpManagerImports.getData(params[0]);
+                Gson gson = new Gson();
+                Patient[] patientlist = gson.fromJson(content, Patient[].class);
+                patientsList = new ArrayList<>(Arrays.asList(patientlist));
+            } else if (type.equals("XML")) {
+                String content = HttpManagerImports.getData(params[0]);
+                patientsList = XMLParser.parseFeed(content);
+            }
 
-            patientsList = XMLParser.parseFeed(content);
 
             for (Patient p : patientsList) {
                 try {
@@ -133,6 +96,7 @@ public class ASyncTaskActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+
             updateDisplay();
         }
 
@@ -142,4 +106,5 @@ public class ASyncTaskActivity extends AppCompatActivity {
 
         }
     }
+
 }

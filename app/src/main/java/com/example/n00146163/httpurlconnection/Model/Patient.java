@@ -98,6 +98,9 @@ public class Patient implements Parcelable {
         this.nextApp = nextApp;
     }
 
+
+    //These functions ware a part of the parceable implementation.
+
     @Override
     public int describeContents() {
         return 0;
