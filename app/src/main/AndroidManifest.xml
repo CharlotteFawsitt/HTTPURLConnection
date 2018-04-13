@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.n00146163.httpurlconnection.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,14 +21,18 @@
         </activity>
 
         <service
-            android:name=".Service.MyIntentService"
+            android:name="com.example.n00146163.httpurlconnection.Service.MyIntentService"
             android:exported="false" />
 
         <activity
-            android:name=".ASyncTaskActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".IntentActivity" android:parentActivityName=".MainActivity" />
-        <activity android:name=".ASyncTaskLoaderActivity" android:parentActivityName=".MainActivity"></activity>
+            android:name="com.example.n00146163.httpurlconnection.ASyncTaskActivity"
+            android:parentActivityName="com.example.n00146163.httpurlconnection.MainActivity" />
+        <activity
+            android:name="com.example.n00146163.httpurlconnection.IntentActivity"
+            android:parentActivityName="com.example.n00146163.httpurlconnection.MainActivity" />
+        <activity
+            android:name="com.example.n00146163.httpurlconnection.ASyncTaskLoaderActivity"
+            android:parentActivityName="com.example.n00146163.httpurlconnection.MainActivity"></activity>
     </application>
 
 </manifest>

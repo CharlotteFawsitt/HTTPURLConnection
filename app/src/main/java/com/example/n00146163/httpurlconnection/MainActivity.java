@@ -14,17 +14,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Click handler to start the a sync task activity
     public void onASyncClicked(View view) {
-        Intent intent= new Intent(this, ASyncTaskActivity.class);
+        Intent intent = new Intent(this, ASyncTaskActivity.class);
         startActivity(intent);
     }
 
+    //Click handler to start the intent activity
     public void onIntentClicked(View view) {
-        Intent intent= new Intent(this, IntentActivity.class);
+        Intent intent = new Intent(this, IntentActivity.class);
         startActivity(intent);
     }
+
+    //Click handler to start the a sync task loader activity
     public void onASyncTaskLoaderClicked(View view) {
-        Intent intent= new Intent(this, ASyncTaskLoaderActivity.class);
+        Intent intent = new Intent(this, ASyncTaskLoaderActivity.class);
         startActivity(intent);
     }
 

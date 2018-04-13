@@ -21,7 +21,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
 
     private List<Patient> mPatients;
     private Context mContext;
-
     public PatientAdapter(Context context, List<Patient> patients) {
         this.mContext = context;
         this.mPatients = patients;
@@ -29,12 +28,13 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
 
 
     @Override
-    public PatientAdapter.ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
+    public PatientAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View itemView = inflater.inflate(R.layout.list_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
         return viewHolder;
     }
+
     public void onBindViewHolder(PatientAdapter.ViewHolder holder, int position) {
 
         final Patient patient = mPatients.get(position);
@@ -43,18 +43,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         holder.tvName.setText(patient.getName());
         String imageFile = patient.getPhoto();
         holder.imageView.setImageBitmap(patient.getBitmap());
-
-//// if the user clicks this ViewHolder start a new intent to open the detail activity for the object that was selected.
-//        holder.mView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//               // String patientId = patient.getPatientId();
-//                Intent intent = new Intent(mContext, MainActivity.class);
-//                mContext.startActivity(intent);
-//            }
-//        });
-
 
     }
 

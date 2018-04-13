@@ -30,7 +30,7 @@ public class Patient implements Parcelable {
     //constructor that takes in parameters and assigns the variables of the constructor to the class
     public Patient(String pId, String n, String g, String pN, String nA, String photo) {
 
-        if(pId == null){
+        if (pId == null) {
             pId = UUID.randomUUID().toString();
         }
         this.patientId = pId;

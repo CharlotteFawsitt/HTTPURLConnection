@@ -24,25 +24,32 @@ import java.util.List;
 
 public class ASyncTaskLoaderActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Patient>> {
 
-    private static final String PHOTOS_BASE_URL = "http://172.18.15.71/patientPhotos/" ;
+    //Constants for the xml, json files and the photo location.
+    private static final String PHOTOS_BASE_URL = "http://172.18.15.71/patientPhotos/";
+    private static final String XML_URL = "http://172.18.15.71/Patient.xml";
+    private static final String JSON_URL = "http://172.18.15.71/Patient.json";
+    //String to be used to set the data type when a button is clicked, and another string for the url.
     String url, type = "";
+    //Arraylist to be used to hold the patients.
     List<Patient> patientsList = new ArrayList<>();
+    //Instance of the recyclerview and the adapter.
     RecyclerView recyclerView;
     PatientAdapter adapter;
-    public static final String XML_URL = "http://172.18.15.71/Patient.xml";
-    public static final String JSON_URL = "http://172.18.15.71/Patient.json";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_async_task_loader);
     }
 
+    //Click handler for the JSON button, Sets the type to "JSON" and starts the loader.
     public void JSONClickHandler(View view) {
         type = "JSON";
         url = JSON_URL;
         getSupportLoaderManager().restartLoader(0, null, this).forceLoad();
     }
 
+    //Click handler for the XML button, Sets the type to "XML" and starts the loader.
     public void XMLClickHandler(View view) {
         type = "XML";
         url = XML_URL;
@@ -55,6 +62,7 @@ public class ASyncTaskLoaderActivity extends AppCompatActivity implements Loader
 
     }
 
+    //CLick handler for the clear button, clears the patientlist and updates the display.
     public void updateDisplay() {
         if (patientsList != null) {
             recyclerView = (RecyclerView) findViewById(R.id.rvItems);
@@ -62,6 +70,8 @@ public class ASyncTaskLoaderActivity extends AppCompatActivity implements Loader
             recyclerView.setAdapter(adapter);
         }
     }
+
+    //These were implemented by the loadermanager
     @Override
     public Loader<List<Patient>> onCreateLoader(int id, Bundle args) {
         return new MyTaskLoader(this, type, url);
@@ -78,11 +88,15 @@ public class ASyncTaskLoaderActivity extends AppCompatActivity implements Loader
 
     }
 
-    private static class MyTaskLoader extends AsyncTaskLoader<List<Patient>>{
+    //innerclass for the loader
+    private static class MyTaskLoader extends AsyncTaskLoader<List<Patient>> {
 
+        //strings for the type, url, xmldata and jsondata, these are needed as the class cannot use the variables
+        //from the main body.
         String type, url, xmlData, jsonData;
         List<Patient> patientList = new ArrayList<>();
         Patient[] patientlistJSON;
+
         public MyTaskLoader(Context context, String type, String url) {
             super(context);
             this.type = type;
@@ -91,6 +105,7 @@ public class ASyncTaskLoaderActivity extends AppCompatActivity implements Loader
 
         @Override
         public List<Patient> loadInBackground() {
+
             if (type.equals("XML")) {
                 xmlData = HttpManagerImports.getData(url);
                 patientList = XMLParser.parseFeed(xmlData);

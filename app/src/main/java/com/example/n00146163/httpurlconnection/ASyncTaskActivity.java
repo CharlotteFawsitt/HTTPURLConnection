@@ -73,7 +73,6 @@ public class ASyncTaskActivity extends AppCompatActivity {
 
         @Override
         protected List<Patient> doInBackground(String... params) {
-
             //Checks to see what type is set to.
             if (type.equals("JSON")) {
                 //gets the url of the file.

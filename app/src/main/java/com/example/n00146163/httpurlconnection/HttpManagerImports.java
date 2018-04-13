@@ -16,10 +16,13 @@ public class HttpManagerImports {
         BufferedReader reader = null;
 
         try {
+            //Creates a new url
             URL url = new URL(uri);
 
+            //creates a connection to the url that has been given
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
+            //builds a string based on the information at the url
             StringBuilder sb = new StringBuilder();
             reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
@@ -29,13 +32,10 @@ public class HttpManagerImports {
                 sb.append(line + "\n");
             }
             return sb.toString();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }
-
-        finally {
+        } finally {
             if (reader != null) {
                 try {
                     reader.close();

@@ -3,8 +3,10 @@ package com.example.n00146163.httpurlconnection.Parsers;
 /**
  * Created by n00146163 on 13/03/2018.
  */
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,10 +76,10 @@ public class XMLParser {
                                 case "phoneNumber":
                                     p.setPhoneNumber(parser.getText());
                                     break;
-                                case "nextApp" :
+                                case "nextApp":
                                     p.setNextApp(parser.getText());
                                     break;
-                                case "photo" :
+                                case "photo":
                                     p.setPhoto(parser.getText());
                                 default:
                                     break;

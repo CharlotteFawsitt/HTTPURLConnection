@@ -35,13 +35,11 @@ public class MyIntentService extends IntentService {
     String data;
     List<Patient> patientList = new ArrayList<>();
     Patient[] patientlist;
+
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
-     *
-     *
      */
-    public MyIntentService()
-    {
+    public MyIntentService() {
         super("MyIntentService");
     }
 
@@ -76,7 +74,7 @@ public class MyIntentService extends IntentService {
         }
 
         Intent messageIntent = new Intent(MY_SERVICE_MESSAGE);
-        messageIntent.putParcelableArrayListExtra(MY_SERVICE_PAYLOAD,(ArrayList<? extends Parcelable>) patientList);
+        messageIntent.putParcelableArrayListExtra(MY_SERVICE_PAYLOAD, (ArrayList<? extends Parcelable>) patientList);
         LocalBroadcastManager manager = LocalBroadcastManager.getInstance(getApplicationContext());
         manager.sendBroadcast(messageIntent);
     }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HTTPURLConnection</string>
+    <string name="app_name">Web Services and Background Threads</string>
     <string name="title_activity_async_task">ActivityASyncTask</string>
     <string name="action_settings">Settings</string>
 </resources>
